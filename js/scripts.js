@@ -57,7 +57,7 @@ $(document).ready(function() {
     $(".contact").last().click(function() {
       $("ul#addresses").text("");
       newContact.addresses.forEach(function(address) {
-        $("ul#addresses").append("<li>" + address.street + ", " + address.city + " " + address.state + "</li>");
+        $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
       });
       $("#show-contact").show();
       $("#show-contact h2").text(newContact.firstName);
