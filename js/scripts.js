@@ -42,6 +42,13 @@ $(document).ready(function() {
     var newContact = new Contact(inputtedFirstName, inputtedLastName);
 
     $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
+    $(".new-address").each(function() {
+      var inputtedStreet = $(this).find("input.new-street").val();
+      var inputtedCity = $(this).find("input.new-city").val();
+      var inputtedState = $(this).find("input.new-state").val();
+      var newAddress = new Address(inputtedStreet, inputtedCity, inputtedState);
+      newContact.addresses.push(newAddress);
+    });
 
     $(".contact").last().click(function() {
     $("#show-contact").show();
