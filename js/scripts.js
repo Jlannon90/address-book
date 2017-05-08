@@ -40,8 +40,6 @@ $(document).ready(function() {
     var inputtedLastName = $("input#new-last-name").val();
 
     var newContact = new Contact(inputtedFirstName, inputtedLastName);
-
-    $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
     $(".new-address").each(function() {
       var inputtedStreet = $(this).find("input.new-street").val();
       var inputtedCity = $(this).find("input.new-city").val();
@@ -50,12 +48,18 @@ $(document).ready(function() {
       newContact.addresses.push(newAddress);
     });
 
+    $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
+
     $(".contact").last().click(function() {
-    $("#show-contact").show();
-    $("#show-contact h2").text(newContact.firstName);
-    $(".first-name").text(newContact.firstName);
-    $(".last-name").text(newContact.lastName);
-  });
+      $("ul#addresses").text("");
+      newContact.addresses.forEach(function(address) {
+        $("ul#addresses").append("<li>" + address.street + ", " + address.city + " " + address.state + "</li>");
+      });
+      $("#show-contact").show();
+      $("#show-contact h2").text(newContact.firstName);
+      $(".first-name").text(newContact.firstName);
+      $(".last-name").text(newContact.lastName);
+    });
 
     $("input#new-first-name").val("");
     $("input#new-last-name").val("");
